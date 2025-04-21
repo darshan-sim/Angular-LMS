@@ -1,0 +1,24 @@
+<form (ngSubmit)="onSubmit()" class="layered box">
+  <p class="errors" *ngIf="errors">
+    Make sure you fill all the fields (Title, Created Date and Note)
+  </p>
+  <div class="note-inputs">
+    <label for="title">Title</label>
+    <input [(ngModel)]="title" type="text" name="title" id="title" />
+  </div>
+  <div class="note-inputs">
+    <label for="createdAt">Created Date</label>
+    <input
+      type="date"
+      [ngModel]="dateString"
+      (ngModelChange)="dateString = $event"
+      name="createdAt"
+      id="createdAt"
+    />
+  </div>
+  <div class="note-inputs">
+    <label for="note">Note</label>
+    <textarea [(ngModel)]="note" name="note" id="note" rows="4"></textarea>
+  </div>
+  <button type="submit">Add Note</button>
+</form>

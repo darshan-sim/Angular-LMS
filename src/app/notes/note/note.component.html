@@ -1,0 +1,79 @@
+<div *ngIf="note() as n; else notFound">
+  <form (ngSubmit)="onSubmit()" class="layered box">
+    <button type="button" (click)="goBack()" class="back-btn">Back</button>
+    <p class="errors" *ngIf="errors">
+      Make sure you fill all the fields (Title, Created Date and Note)
+    </p>
+    <div class="note-inputs">
+      <label for="title">Title</label>
+      <input
+        [(ngModel)]="this.form().title"
+        type="text"
+        name="title"
+        id="title"
+        [class.readonly-input]="!isEditing"
+        [readOnly]="!isEditing"
+      />
+    </div>
+    <div class="note-inputs">
+      <label for="createdAt">Created Date</label>
+      <input
+        type="date"
+        [(ngModel)]="dateString"
+        name="createdAt"
+        id="createdAt"
+        [class.readonly-input]="!isEditing"
+        [readOnly]="!isEditing"
+      />
+    </div>
+    <div class="note-inputs">
+      <label for="note">Note</label>
+      <textarea
+        [(ngModel)]="this.form().note"
+        name="note"
+        id="note"
+        [class.readonly-input]="!isEditing"
+        [readOnly]="!isEditing"
+        rows="4"
+      ></textarea>
+    </div>
+    <div
+      *ngIf="note() && note()?.deletedAt; else updateActions"
+      class="button-group"
+    >
+      <button
+        type="button"
+        (click)="onRestore(note()?.id)"
+        class="restore-button"
+      >
+        Restore
+      </button>
+    </div>
+    <ng-template #updateActions>
+      <div *ngIf="isEditing; else editMode" class="button-group">
+        <button type="button" (click)="onCancel()" class="cancel-btn">
+          Cancel
+        </button>
+        <button type="submit" class="update-btn">Update</button>
+      </div>
+      <ng-template #editMode>
+        <div class="button-group">
+          <button
+            type="button"
+            (click)="onDelete(note()?.id)"
+            class="delete-button"
+          >
+            Delete
+          </button>
+          <button type="button" (click)="onEdit()" class="edit-btn">
+            Edit
+          </button>
+        </div>
+      </ng-template>
+    </ng-template>
+  </form>
+</div>
+
+<ng-template #notFound>
+  <p>Note note found</p>
+</ng-template>

@@ -1,0 +1,38 @@
+<header>
+  <h2>My notes</h2>
+</header>
+
+<ul>
+  @for (note of notes(); track note) {
+  <li
+    [ngClass]="{
+      'new-note': !note.deletedAt && !note.updatedAt,
+      'updated-note': !note.deletedAt && note.updatedAt,
+      'deleted-note': note.deletedAt
+    }"
+  >
+    <a [routerLink]="'/note/' + note.id">
+      <p>{{ note.title }}</p>
+    </a>
+    <div>
+      <div *ngIf="!note.deletedAt; else restoreButton">
+        <button
+          class="edit-button"
+          [routerLink]="['/note', note.id]"
+          [queryParams]="{ edit: true }"
+        >
+          Edit
+        </button>
+        <button class="delete-button" (click)="onDelete(note.id)">
+          Delete
+        </button>
+      </div>
+      <ng-template #restoreButton>
+        <button class="restore-button" (click)="onRestore(note.id)">
+          Restore
+        </button>
+      </ng-template>
+    </div>
+  </li>
+  }
+</ul>

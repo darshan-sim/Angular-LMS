@@ -1,0 +1,114 @@
+:host {
+    display: block;
+    max-width: 30rem;
+    min-width: 15rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+    padding: 2rem;
+    background: #bbd0ff;
+    border-radius: 5px;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.2);
+}
+
+ul {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: .2rem;
+    transition: box-shadow 80ms ease-in-out, scale 80ms ease-in-out;
+    position: relative;
+    overflow: hidden;
+    outline: none;
+    padding-right: .5rem;
+    border-radius: 3px;
+}
+a {
+    all: unset; /* Remove all default styles */
+    cursor: pointer;
+    padding: .5rem;
+    padding-left: .8rem;
+    display: block;
+    flex-grow: 1;
+}
+
+li::before {
+    content: "";
+    position: absolute;
+    top: -10%;
+    left: -5px;
+    width: 10px;
+    height: 120%;
+    background: #f8f7ff;
+    border-radius: 3px;
+}
+
+li:hover {
+    box-shadow: 8.0px 16.0px 16.0px hsl(0deg 0% 0% / 0.25);
+    scale: 1.02;
+    /* opacity: .9; */
+}
+
+
+p {
+    font-size: 1rem;
+    max-width: 25rem;
+    font-weight: 600;
+}
+
+button {
+    background: none;
+    border: none;
+    outline: none;
+    padding: .4rem .9rem;
+    font-size: .8rem;
+    font-weight: 700;
+    border-radius: 3px;
+    color: #f8f7ff;
+    cursor: pointer;
+}
+button:hover {
+    outline: 2px solid white;
+    outline-offset: -2px;
+}
+
+.edit-button {
+    background-color: #38b000;
+    background-color: #38b000;
+    margin-right: .4rem;
+}
+.delete-button {
+    background-color: #f25f5c;
+}
+.restore-button {
+    background-color: #595959;
+}
+
+:host {
+    box-shadow:
+        0 1px 1px hsl(0deg 0% 0% / 0.075),
+        0 2px 2px hsl(0deg 0% 0% / 0.075),
+        0 4px 4px hsl(0deg 0% 0% / 0.075),
+        0 8px 8px hsl(0deg 0% 0% / 0.075),
+        0 16px 16px hsl(0deg 0% 0% / 0.075);
+}
+
+.updated-note {
+    background: hsla(39, 92%, 57%, 0.7);
+}
+
+.deleted-note {
+    background-color: hsla(1, 85%, 65%, 0.4);
+}
+
+.new-note {
+    background-color: hsla(101, 100%, 35%, 0.4);
+}
