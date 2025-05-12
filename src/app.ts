@@ -140,6 +140,6 @@ export function createApp(db: Low<Data>, options: AppOptions = {}) {
       res.json(data)
     }
   })
-
   return app
 }
+
