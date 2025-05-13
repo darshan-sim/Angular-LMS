@@ -1,0 +1,13 @@
+<div class="absolute top-1/5 left-1/5 -translate-1/5">
+  <form #form="ngForm" (submit)="onSubmit()">
+    <label for="userSelect">Select User:</label>
+    <select id="userSelect" [(ngModel)]="selectedUser" name="user">
+      <option *ngFor="let user of users()" [value]="user.id">
+        {{ user.name }}
+      </option>
+    </select>
+    <button type="submit">
+      Login
+    </button>
+  </form>
+</div>

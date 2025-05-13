@@ -1,0 +1,17 @@
+<div class="relative pl-10 py-3">
+  <div class="flex items-start space-x-3">
+    <img
+      [src]="`https://randomuser.me/api/portraits/men/${comment().userId}.jpg`"
+      alt="Profile"
+      class="w-8 h-8 rounded-full object-cover"
+    />
+    <div class="flex-1">
+      <div class="flex items-center space-x-2">
+        <span class="font-semibold text-sm">{{comment().name}}</span>
+      </div>
+      <p class="text-sm mt-1">
+        {{comment().body}}
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-export interface CommentsDTO {
+export interface CommentDTO {
   postId: number;
   id: number;
   name: string;
@@ -7,10 +7,10 @@ export interface CommentsDTO {
   userId: number;
 }
 
-export interface CommentsCreateDTO {
-  postId: number;
+export interface CommentCreateDTO {
+  postId: string;
   name: string;
   email: string;
   body: string;
-  userId: number;
+  userId: string;
 }

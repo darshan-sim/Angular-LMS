@@ -1,0 +1,35 @@
+<div class="bg-white rounded-lg shadow-md mb-6" data-post-id="2">
+  <div class="p-4">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <img
+          [src]="`https://randomuser.me/api/portraits/men/${post().userId}.jpg`"
+          alt="Profile"
+          class="w-12 h-12 rounded-full"
+        />
+        <div>
+          <h3 class="font-semibold">{{ post().title }}</h3>
+        </div>
+      </div>
+      <button class="text-gray-500 hover:bg-gray-100 p-2 rounded-full">
+        <i class="fas fa-ellipsis-h"></i>
+      </button>
+    </div>
+    <div class="mt-4">
+      <p>
+        {{ post().body }}
+      </p>
+    </div>
+    <button type="button" class=" block ml-auto hover: hover:text-blue-800">
+      <i class="far fa-comment text-lg"></i>
+      Comments
+    </button>
+    @if(showComments){
+      
+    }
+    <app-comment-input
+      (submitComment)="onComment($event)"
+      [userId]="user()?.id"
+    ></app-comment-input>
+  </div>
+</div>
