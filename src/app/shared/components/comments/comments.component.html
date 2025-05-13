@@ -1,1 +1,7 @@
-<p>comments works!</p>
+@if(comments().length > 0){ @for (comment of comments(); track comment.id) {
+<app-comment [comment]="comment" />
+} }@else {
+<div class="flex flex-col items-center">
+  <p>No comments Yet</p>
+</div>
+}

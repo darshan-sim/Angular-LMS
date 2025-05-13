@@ -8,9 +8,9 @@ export interface CommentDTO {
 }
 
 export interface CommentCreateDTO {
-  postId: string;
+  postId: number;
   name: string;
   email: string;
   body: string;
-  userId: string;
+  userId: number;
 }

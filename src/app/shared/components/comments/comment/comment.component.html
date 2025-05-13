@@ -5,13 +5,20 @@
       alt="Profile"
       class="w-8 h-8 rounded-full object-cover"
     />
-    <div class="flex-1">
-      <div class="flex items-center space-x-2">
-        <span class="font-semibold text-sm">{{comment().name}}</span>
+    <div class="flex-1 flex gap-2">
+      <div class="grow">
+        <div class="flex items-center space-x-2">
+          <span class="font-semibold text-sm">{{ comment().name }}</span>
+        </div>
+        <p class="text-sm mt-1">
+          {{ comment().body }}
+        </p>
       </div>
-      <p class="text-sm mt-1">
-        {{comment().body}}
-      </p>
+      @if(canDelete){
+        <button (click)="onCommentDelete(comment().id)">
+          <i class="fa fa-trash text-red-600" aria-hidden="true"></i>
+        </button>
+      }
     </div>
   </div>
 </div>

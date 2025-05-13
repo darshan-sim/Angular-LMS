@@ -1,7 +1,6 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { PostDTO } from '../../shared/models/post';
-import { HomeService } from './home.service';
+import { Component, inject, OnInit } from '@angular/core';
 import { PostComponent } from "../../shared/components/post/post.component";
+import { PostsService } from '../../shared/service/posts.service';
 
 @Component({
   selector: 'app-home',
@@ -10,13 +9,11 @@ import { PostComponent } from "../../shared/components/post/post.component";
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  allPosts = signal<PostDTO[]>([]);
-
-  homeService = inject(HomeService);
+  
+  postsService = inject(PostsService);
+  allPosts = this.postsService.allPosts;
 
   ngOnInit(): void {
-    this.homeService.getAllPost().subscribe({
-      next: (posts) => this.allPosts.set(posts),
-    });
+    this.postsService.loadPosts()
   }
 }

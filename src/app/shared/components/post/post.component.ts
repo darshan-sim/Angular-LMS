@@ -4,26 +4,44 @@ import { AuthService } from '../../../core/auth.service';
 import { UserDTO } from '../../models/user';
 import { FormsModule } from '@angular/forms';
 import { CommentInputComponent } from '../comment-input/comment-input.component';
-import { CommentService } from '../../service/comment.service';
 import { CommentCreateDTO } from '../../models/comments';
+import { CommentsComponent } from '../comments/comments.component';
+import { PostService } from '../../service/post-comments.service';
+import { RouterLink } from '@angular/router';
+import { PostsService } from '../../service/posts.service';
 
 @Component({
   selector: 'app-post',
-  imports: [FormsModule, CommentInputComponent],
+  imports: [FormsModule, CommentInputComponent, CommentsComponent, RouterLink],
+  providers: [PostService],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css',
 })
 export class PostComponent implements OnInit {
   post = input.required<PostDTO>();
   authService = inject(AuthService);
-  commentService = inject(CommentService);
-  showComments:boolean = false
+  showComments: boolean = false;
+
+  postsService = inject(PostsService)
 
   user = signal<UserDTO | null>(null);
   comment = '';
 
+  commentStat = inject(PostService);
+
   ngOnInit(): void {
     this.user.set(this.authService.user());
+  }
+
+  onCommentToggle() {
+    this.showComments = !this.showComments;
+    if (this.showComments) {
+      this.commentStat.loadComments(this.post().id);
+    }
+  }
+
+  onDelete(postId: number){
+    this.postsService.deletePost(postId)
   }
 
   onComment(commentBody: string) {
@@ -38,8 +56,6 @@ export class PostComponent implements OnInit {
       name: u.name,
       postId: this.post().id,
     };
-    this.commentService.createComment(comment).subscribe({
-      next : comment => console.log(comment)
-    });
+    this.commentStat.addComments(comment);
   }
 }

@@ -1,7 +1,13 @@
-<!-- <h1 class="text-3xl font-bold underline text-">
-  Hello world!
-</h1> -->
-<app-navbar/>
-<div class="min-h-screen max-w-[40rem] m-auto mt-32 border-[1px] border-gray-300 p-3 rounded">
+<app-navbar />
+<div class="min-h-screen max-w-[40rem] m-auto mt-28">
+  <button
+    routerLink="user/post/create"
+    type="button"
+    class="text-white block ml-auto bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none"
+  >
+    Create New Post
+  </button>
+  <div class="border-[1px] border-gray-300 p-3 rounded">
     <router-outlet></router-outlet>
+  </div>
 </div>

@@ -1,22 +1,30 @@
 import { inject, Injectable } from '@angular/core';
 import { CommentCreateDTO, CommentDTO } from '../models/comments';
 import { BaseAPIService } from './baseAPI.service';
-import { CommentApi, PostApi } from '../api-endpoints';
+import { CommentApi } from '../api-endpoints';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CommentService {
+  baseAPIService = inject(BaseAPIService);
 
-  baseAPIService = inject(BaseAPIService)
+  constructor() {}
 
-  constructor() { }
-  
-  createComment(comment: CommentCreateDTO){
-    return this.baseAPIService.post<CommentDTO, CommentCreateDTO>(CommentApi.Comment, comment)
+  createComment(comment: CommentCreateDTO) {
+    return this.baseAPIService.post<CommentDTO, CommentCreateDTO>(
+      CommentApi.Comment,
+      comment
+    );
   }
 
-  getCommentByPostId(postId: string){
-    return this.baseAPIService.get<CommentDTO>(PostApi.CommentsByPostId(postId))
+  getCommentByPostId(postId: number) {
+    return this.baseAPIService.get<CommentDTO[]>(
+      CommentApi.CommentsByPostId(postId)
+    );
+  }
+
+  deleteComment(id: number) {
+    return this.baseAPIService.delete<boolean>(CommentApi.DeleteComment(id));
   }
 }

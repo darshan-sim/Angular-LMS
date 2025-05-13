@@ -1,0 +1,35 @@
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()" class="space-y-4">
+  <div>
+    <label for="title" class="block mb-2">Title</label>
+    <input
+      id="title"
+      type="text"
+      formControlName="title"
+      class="w-full p-2 border rounded"
+    />
+    @if(titleErrors) {
+    <span class="text-red-500 text-sm">{{ titleErrors }}</span>
+    }
+  </div>
+
+  <div>
+    <label for="body" class="block mb-2">Body</label>
+    <textarea
+      id="body"
+      formControlName="body"
+      rows="2"
+      class="w-full p-2 border rounded"
+    ></textarea>
+        @if(bodyErrors) {
+      <span class="text-red-500 text-sm">{{ bodyErrors }}</span>
+    }
+  </div>
+
+  <button
+    type="submit"
+    [disabled]="!postForm.valid"
+    class="px-4 py-2 bg-blue-500 text-white rounded"
+  >
+    Create Post
+  </button>
+</form>

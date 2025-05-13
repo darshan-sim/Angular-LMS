@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { environment } from '../../../environment';
 
 @Injectable({
@@ -12,6 +12,9 @@ export class BaseAPIService {
   get<T>(url: string, params?: HttpParams): Observable<T> {
     return this.http
       .get<T>(environment.apiBase + url, { params })
+      .pipe(
+        map(data => {console.log({data}); return data})
+      )
       .pipe(
         catchError((error) =>
           throwError(

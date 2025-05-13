@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './comment-input.component.css'
 })
 export class CommentInputComponent {
-  userId = input<string | undefined>(undefined)
+  userId = input<number | undefined>(undefined)
   @Output() submitComment = new EventEmitter<string>();
   text = '';
 

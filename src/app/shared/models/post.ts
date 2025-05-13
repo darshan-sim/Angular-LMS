@@ -1,12 +1,12 @@
 export interface PostDTO {
-  userId: string;
-  id: string;
+  userId: number;
+  id: number;
   title: string;
   body: string;
 }
 
 export interface PostCreateDTO {
-  userId: string;
+  userId: number;
   title: string;
   body: string;
 }
