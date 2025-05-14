@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   users = signal<UserDTO[]>([]);
-  selectedUser: number = 0;
+  selectedUser: string = "";
 
   loginService = inject(LoginService);
 

@@ -1,16 +1,16 @@
 export interface CommentDTO {
-  postId: number;
-  id: number;
+  postId: string;
+  id: string;
   name: string;
   email: string;
   body: string;
-  userId: number;
+  userId: string;
 }
 
 export interface CommentCreateDTO {
-  postId: number;
+  postId: string;
   name: string;
   email: string;
   body: string;
-  userId: number;
+  userId: string;
 }

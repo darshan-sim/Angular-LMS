@@ -9,6 +9,7 @@ import { CommentsComponent } from '../comments/comments.component';
 import { PostService } from '../../service/post-comments.service';
 import { RouterLink } from '@angular/router';
 import { PostsService } from '../../service/posts.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post',
@@ -22,7 +23,8 @@ export class PostComponent implements OnInit {
   authService = inject(AuthService);
   showComments: boolean = false;
 
-  postsService = inject(PostsService)
+  postsService = inject(PostsService);
+  router = inject(Router);
 
   user = signal<UserDTO | null>(null);
   comment = '';
@@ -31,6 +33,8 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     this.user.set(this.authService.user());
+    console.log(this.post().userId);
+    console.log(this.user()?.id);
   }
 
   onCommentToggle() {
@@ -40,8 +44,8 @@ export class PostComponent implements OnInit {
     }
   }
 
-  onDelete(postId: number){
-    this.postsService.deletePost(postId)
+  onDelete(postId: string) {
+    this.postsService.deletePost(postId);
   }
 
   onComment(commentBody: string) {

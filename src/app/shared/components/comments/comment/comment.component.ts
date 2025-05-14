@@ -23,7 +23,7 @@ export class CommentComponent implements OnInit {
   authService = inject(AuthService);
   postCommentService = inject(PostService);
 
-  userId = signal<number | undefined>(undefined);
+  userId = signal<string | undefined>(undefined);
 
   ngOnInit(): void {
     const uId = this.authService.user()?.id;
@@ -34,7 +34,7 @@ export class CommentComponent implements OnInit {
     console.log(this.comment().userId);
   }
 
-  onCommentDelete(id: number) {
+  onCommentDelete(id: string) {
     this.postCommentService.removeComment(id);
   }
 

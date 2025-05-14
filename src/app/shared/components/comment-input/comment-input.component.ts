@@ -5,17 +5,17 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-comment-input',
   imports: [FormsModule],
   templateUrl: './comment-input.component.html',
-  styleUrl: './comment-input.component.css'
+  styleUrl: './comment-input.component.css',
 })
 export class CommentInputComponent {
-  userId = input<number | undefined>(undefined)
+  userId = input<string | undefined>(undefined);
   @Output() submitComment = new EventEmitter<string>();
   text = '';
 
-  ngOnInit(){
-    console.log(this.userId())
+  ngOnInit() {
+    console.log(this.userId());
   }
-  
+
   emit() {
     const trimmed = this.text.trim();
     if (trimmed) {

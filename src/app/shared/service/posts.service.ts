@@ -18,8 +18,10 @@ export class PostsService {
       .post<PostDTO, PostCreateDTO>(PostApi.Posts, post)
       .subscribe({
         next: (post) => {
-          console.log(post);
-          this.router.navigate(['/user', 'post']);
+          this.posts.set([...this.posts(), post])
+          this.router.navigate(['/user', 'post', 'view'], {
+            queryParams: { id: post.id },
+          });
         },
         error: (error) => console.log(error),
       });
@@ -29,22 +31,31 @@ export class PostsService {
     this.baseAPIService.get<PostDTO[]>(PostApi.Posts).subscribe({
       next: (list) => {
         this.posts.set(list);
-        console.log(list);
       },
       error: (error) => console.log(error),
     });
   }
 
-  deletePost(postId: number) {
+  getPostByUser(userId: string) {
+    this.baseAPIService.get<PostDTO[]>(PostApi.PostByUserId(userId)).subscribe({
+      next: (list) => {
+        this.posts.set(list);
+      },
+      error: (error) => console.log(error),
+    });
+  }
+
+  deletePost(postId: string) {
     this.baseAPIService.delete<boolean>(PostApi.PostById(postId)).subscribe({
       next: () => {
         this.posts.set(this.posts().filter((p) => p.id !== postId));
+        this.router.navigate(['/user/post']);
       },
       error: (error) => console.log(error),
     });
   }
 
-  updatePost(postId: number, updatedPost: PostDTO) {
+  updatePost(postId: string, updatedPost: PostDTO) {
     this.baseAPIService
       .put<PostDTO, PostDTO>(PostApi.PostById(postId), updatedPost)
       .subscribe({
@@ -52,8 +63,22 @@ export class PostsService {
           this.posts.set(
             this.posts().map((p) => (p.id !== postId ? p : updated))
           );
+          this.router.navigate(['/user', 'post', 'view'], {
+            queryParams: { id: postId },
+          });
         },
         error: (error) => console.log(error),
       });
+  }
+
+  getPostById(postId: string, forceRefresh = false): PostDTO | null {
+
+    // Normal case: return post from current state
+    const post = this.allPosts().find((p) => p.id === postId);
+    if (!post) {
+      this.router.navigate(['/home']);
+      return null;
+    }
+    return post;
   }
 }

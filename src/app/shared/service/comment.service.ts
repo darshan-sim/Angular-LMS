@@ -18,13 +18,13 @@ export class CommentService {
     );
   }
 
-  getCommentByPostId(postId: number) {
+  getCommentByPostId(postId: string) {
     return this.baseAPIService.get<CommentDTO[]>(
       CommentApi.CommentsByPostId(postId)
     );
   }
 
-  deleteComment(id: number) {
+  deleteComment(id: string) {
     return this.baseAPIService.delete<boolean>(CommentApi.DeleteComment(id));
   }
 }

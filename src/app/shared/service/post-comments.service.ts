@@ -15,7 +15,7 @@ export class PostService {
 
   commentService = inject(CommentService);
 
-  loadComments(postId: number): void {
+  loadComments(postId: string): void {
     this.commentService.getCommentByPostId(postId).subscribe({
       next: (list) => {
         this.comments$$.set(list);
@@ -34,7 +34,7 @@ export class PostService {
     });
   }
 
-  removeComment(commentId: number): void {
+  removeComment(commentId: string): void {
     this.commentService.deleteComment(commentId).subscribe({
       next: () => {
         this.comments$$.set(
@@ -45,7 +45,7 @@ export class PostService {
     });
   }
 
-  setDeleteCommentsOnPost(userId: number) {
+  setDeleteCommentsOnPost(userId: string) {
     const uId = this.authService.user()?.id;
     if (uId === userId) {
       this.canDeleteCommentsOnPost.set(true);
