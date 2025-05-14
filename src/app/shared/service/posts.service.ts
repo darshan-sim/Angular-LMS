@@ -3,6 +3,7 @@ import { BaseAPIService } from './baseAPI.service';
 import { PostCreateDTO, PostDTO } from '../models/post';
 import { PostApi } from '../api-endpoints';
 import { Router } from '@angular/router';
+import { catchError, Observable, of } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class PostsService {
@@ -18,7 +19,7 @@ export class PostsService {
       .post<PostDTO, PostCreateDTO>(PostApi.Posts, post)
       .subscribe({
         next: (post) => {
-          this.posts.set([...this.posts(), post])
+          this.posts.set([...this.posts(), post]);
           this.router.navigate(['/user', 'post', 'view'], {
             queryParams: { id: post.id },
           });
@@ -71,14 +72,18 @@ export class PostsService {
       });
   }
 
-  getPostById(postId: string, forceRefresh = false): PostDTO | null {
+  getPostById(postId: string): Observable<PostDTO | undefined>{
+     const post = this.allPosts().find((p) => p.id === postId);
 
-    // Normal case: return post from current state
-    const post = this.allPosts().find((p) => p.id === postId);
-    if (!post) {
-      this.router.navigate(['/home']);
-      return null;
-    }
-    return post;
+     if (post) {
+       return of(post); 
+     }
+
+     return this.baseAPIService.get<PostDTO>(PostApi.PostById(postId)).pipe(
+       catchError((err) => {
+         console.error('Post not found or error', err);
+         return of(undefined);
+       })
+     );
   }
 }

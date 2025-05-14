@@ -10,10 +10,12 @@ import { CommentDTO } from '../../../models/comments';
 import { AuthService } from '../../../../core/auth.service';
 import { CommentService } from '../../../service/comment.service';
 import { PostService } from '../../../service/post-comments.service';
+// import { CommentInputComponent } from '../../comment-input/comment-input.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-comment',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css',
 })
@@ -23,15 +25,34 @@ export class CommentComponent implements OnInit {
   authService = inject(AuthService);
   postCommentService = inject(PostService);
 
+  ownPostDelete = this.postCommentService.canDeleteCommentsOnPost.asReadonly();
+  isEditing = false;
   userId = signal<string | undefined>(undefined);
+  text = '';
 
   ngOnInit(): void {
     const uId = this.authService.user()?.id;
     if (uId) {
       this.userId.set(uId);
     }
-    // console.log(this.userId())
-    console.log(this.comment().userId);
+  }
+
+  emit() {
+    const trimmed = this.text.trim();
+    if (trimmed) {
+      const updatedComment: CommentDTO = {
+        ...this.comment(),
+        body: trimmed
+      }
+      this.postCommentService.updateComment(this.comment().id, updatedComment);
+      this.text = '';
+      this.isEditing = false
+    }
+  }
+
+  onCommentEditMode() {
+    this.text = this.comment().body
+    this.isEditing = !this.isEditing;
   }
 
   onCommentDelete(id: string) {
@@ -40,8 +61,11 @@ export class CommentComponent implements OnInit {
 
   get canDelete(): boolean {
     return (
-      this.userId()?.toString() === this.comment().userId.toString() ||
-      this.postCommentService.canDeleteCommentsOnPost()
+      this.ownPostDelete() ||
+      this.userId()?.toString() === this.comment().userId.toString()
     );
+  }
+  get canEdit(): boolean {
+    return this.userId()?.toString() === this.comment().userId.toString();
   }
 }

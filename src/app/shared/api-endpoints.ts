@@ -12,4 +12,5 @@ export const CommentApi = {
   Comment: '/comments',
   CommentsByPostId: (id: string) => `/comments?postId=${id}`,
   DeleteComment: (id: string) => `/comments/${id}`,
+  UpdateComment: (id: string) => `/comments/${id}`,
 };

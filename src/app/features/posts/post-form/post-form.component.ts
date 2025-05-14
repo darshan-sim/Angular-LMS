@@ -32,20 +32,21 @@ export class PostFormComponent implements OnInit {
   route = inject(ActivatedRoute);
 
   ngOnInit() {
-    console.log('edit mode');
     if (this.mode() === 'edit' && this.postId()) {
-      // Make sure postId is a string
       const id = this.postId();
       if (id) {
-        // Use the new getPostById method
-        const post = this.postsService.getPostById(id);
-        if (post) {
-          this.postForm.setValue({
-            title: post.title,
-            body: post.body,
-          });
-        }
-        console.log(post);
+        this.postsService.getPostById(id).subscribe({
+          next: (post) => {
+            if (post) {
+              this.postForm.setValue({
+                title: post.title,
+                body: post.body,
+              });
+            } else {
+              this.router.navigate(['/not-found']);
+            }
+          },
+        });
       }
     }
   }

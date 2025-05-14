@@ -12,10 +12,6 @@ export class CommentInputComponent {
   @Output() submitComment = new EventEmitter<string>();
   text = '';
 
-  ngOnInit() {
-    console.log(this.userId());
-  }
-
   emit() {
     const trimmed = this.text.trim();
     if (trimmed) {

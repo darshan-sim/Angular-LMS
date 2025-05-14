@@ -35,7 +35,6 @@ export class PostsComponent implements OnInit {
     if (routeAction) {
       this.action = routeAction as 'view' | 'create' | 'edit';
     }
-    console.log(this.action);
 
     this.route.queryParams.subscribe((params) => {
       if (params['action']) {
@@ -51,10 +50,15 @@ export class PostsComponent implements OnInit {
           }
 
           if (this.postId) {
-            const post = this.postsService.getPostById(this.postId, true);
-            if (post) {
-              this.currentPost = post;
-            }
+            this.postsService.getPostById(this.postId).subscribe({
+              next: (post) => {
+                if (post) {
+                  this.currentPost = post;
+                } else {
+                  this.router.navigate(['/not-found']);
+                }
+              },
+            });
           }
         }
       }

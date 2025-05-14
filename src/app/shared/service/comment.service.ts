@@ -18,6 +18,13 @@ export class CommentService {
     );
   }
 
+  updateComment(commentId: string, comment: CommentDTO) {
+    return this.baseAPIService.put<CommentDTO, CommentDTO>(
+      CommentApi.UpdateComment(commentId),
+      comment
+    );
+  }
+
   getCommentByPostId(postId: string) {
     return this.baseAPIService.get<CommentDTO[]>(
       CommentApi.CommentsByPostId(postId)

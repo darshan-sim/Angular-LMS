@@ -9,7 +9,7 @@ export class PostService {
   private comments$$ = signal<CommentDTO[]>([]);
   readonly comments$ = this.comments$$.asReadonly();
 
-  canDeleteCommentsOnPost = signal<boolean>(false);
+  canDeleteCommentsOnPost = signal<boolean>(true);
 
   authService = inject(AuthService);
 
@@ -19,7 +19,6 @@ export class PostService {
     this.commentService.getCommentByPostId(postId).subscribe({
       next: (list) => {
         this.comments$$.set(list);
-        this.setDeleteCommentsOnPost(postId)
       },
       error: (error) => console.log(error),
     });
@@ -29,6 +28,17 @@ export class PostService {
     this.commentService.createComment(comment).subscribe({
       next: (newComment) => {
         this.comments$$.set([...this.comments$$(), newComment]);
+      },
+      error: (err) => console.error('add comment', err),
+    });
+  }
+
+  updateComment(commentId: string, comment: CommentDTO): void {
+    this.commentService.updateComment(commentId, comment).subscribe({
+      next: (newComment) => {
+        this.comments$$.set(
+          this.comments$$().map((c) => (c.id !== commentId ? c : newComment))
+        );
       },
       error: (err) => console.error('add comment', err),
     });
@@ -47,9 +57,11 @@ export class PostService {
 
   setDeleteCommentsOnPost(userId: string) {
     const uId = this.authService.user()?.id;
-    if (uId === userId) {
+    if (uId === userId.toString()) {
+      console.log(uId === userId);
       this.canDeleteCommentsOnPost.set(true);
     } else {
+      console.log('Cant');
       this.canDeleteCommentsOnPost.set(false);
     }
   }

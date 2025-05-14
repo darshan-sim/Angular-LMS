@@ -33,13 +33,13 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     this.user.set(this.authService.user());
-    console.log(this.post().userId);
-    console.log(this.user()?.id);
   }
 
   onCommentToggle() {
     this.showComments = !this.showComments;
     if (this.showComments) {
+      this.commentStat.setDeleteCommentsOnPost(this.post().userId);
+      console.log('postUserId', this.post().userId);
       this.commentStat.loadComments(this.post().id);
     }
   }
