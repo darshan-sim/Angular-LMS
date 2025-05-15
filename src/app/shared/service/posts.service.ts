@@ -4,15 +4,29 @@ import { PostCreateDTO, PostDTO } from '../models/post';
 import { PostApi } from '../api-endpoints';
 import { Router } from '@angular/router';
 import { catchError, Observable, of } from 'rxjs';
+import { PaginatedResponse } from '../models/paginated-response';
 
 @Injectable({ providedIn: 'root' })
 export class PostsService {
   posts = signal<PostDTO[]>([]);
   readonly allPosts = this.posts.asReadonly();
 
-  baseAPIService = inject(BaseAPIService);
+  private currentPage = signal(0);
+  private totalPages = signal(1);
+  private isLoading = signal(false);
 
   router = inject(Router);
+  baseAPIService = inject(BaseAPIService);
+
+  reset() {
+    this.posts.set([]);
+    this.currentPage.set(0);
+    this.totalPages.set(1);
+  }
+
+  hasMore() {
+    return this.currentPage() < this.totalPages();
+  }
 
   createPost(post: PostCreateDTO) {
     this.baseAPIService
@@ -28,10 +42,18 @@ export class PostsService {
       });
   }
 
-  loadPosts() {
-    this.baseAPIService.get<PostDTO[]>(PostApi.Posts).subscribe({
-      next: (list) => {
-        this.posts.set(list);
+  loadNextPage() {
+    if(this.isLoading() || !this.hasMore()) return
+    const nextPage = this.currentPage() + 1
+    this.isLoading.set(true)
+
+    this.baseAPIService.get<PaginatedResponse<PostDTO>>(`${PostApi.Posts}?_page=${nextPage}`).subscribe({
+      next: (res) => {
+        this.posts.update(current => [...current, ...res.data]);
+        console.log(this.allPosts())
+        this.currentPage.set(nextPage)
+        this.totalPages.set(res.pages)
+        this.isLoading.set(false)
       },
       error: (error) => console.log(error),
     });
@@ -72,18 +94,18 @@ export class PostsService {
       });
   }
 
-  getPostById(postId: string): Observable<PostDTO | undefined>{
-     const post = this.allPosts().find((p) => p.id === postId);
+  getPostById(postId: string): Observable<PostDTO | undefined> {
+    const post = this.allPosts().find((p) => p.id === postId);
 
-     if (post) {
-       return of(post); 
-     }
+    if (post) {
+      return of(post);
+    }
 
-     return this.baseAPIService.get<PostDTO>(PostApi.PostById(postId)).pipe(
-       catchError((err) => {
-         console.error('Post not found or error', err);
-         return of(undefined);
-       })
-     );
+    return this.baseAPIService.get<PostDTO>(PostApi.PostById(postId)).pipe(
+      catchError((err) => {
+        console.error('Post not found or error', err);
+        return of(undefined);
+      })
+    );
   }
 }

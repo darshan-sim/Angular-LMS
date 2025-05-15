@@ -1,10 +1,17 @@
 @if(allPosts().length > 0){
+<cdk-virtual-scroll-viewport
+  itemSize="230"
+  class="viewport"
+  (scrolledIndexChange)="onScrolledIndexChange($event)"
+>
   @for (post of allPosts(); track post.id) {
-    <app-post [post]="post"/>
+  <app-post [post]="post" />
   }
+</cdk-virtual-scroll-viewport>
+
 }@else {
-  <div class="flex flex-col items-center">  
-    <p>No Post Found</p>
-    <span class="text-sm text-gray-500">It's sad no one is using our app :(</span>
-  </div>
+<div class="flex flex-col items-center">
+  <p>No Post Found</p>
+  <span class="text-sm text-gray-500">It's sad no one is using our app :(</span>
+</div>
 }

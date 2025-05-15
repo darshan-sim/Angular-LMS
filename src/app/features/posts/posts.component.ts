@@ -46,7 +46,7 @@ export class PostsComponent implements OnInit {
 
         if (this.action === 'view' || this.action === 'edit') {
           if (this.postsService.allPosts().length === 0) {
-            this.postsService.loadPosts();
+            this.postsService.loadNextPage();
           }
 
           if (this.postId) {
@@ -66,7 +66,7 @@ export class PostsComponent implements OnInit {
 
     // Load posts if they haven't been loaded yet
     if (this.postsService.allPosts().length === 0) {
-      this.postsService.loadPosts();
+      this.postsService.loadNextPage();
     }
   }
 }

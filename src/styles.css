@@ -3,4 +3,5 @@
 body {
   font-family: "Lexend", sans-serif;
   font-optical-sizing: auto;
+  min-height: 100vh;
 }

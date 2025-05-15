@@ -1,0 +1,6 @@
+/* home.component.css */
+.viewport {
+  height: calc(100vh - 10rem); /* leave room for header/footer */
+  width: 100%;
+  overflow: auto; /* required for internal scrolling */
+}
