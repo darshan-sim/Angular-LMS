@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { Product, productsData } from '../types/product';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,7 +13,7 @@ import { ProductStore } from '../services/product.store';
   selector: 'app-product-listing',
   imports: [MatCardModule, MatButtonModule, MatIconModule, MatGridListModule, MatBadgeModule, CurrencyPipe],
   templateUrl: './product-listing.component.html',
-  styleUrl: './product-listing.component.css',
+  styleUrl: './product-listing.component.scss',
 })
 export class ProductListingComponent {
   products: Product[];

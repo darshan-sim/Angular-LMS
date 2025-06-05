@@ -1,0 +1,122 @@
+@use '@angular/material' as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+  @include mat.form-field-overrides((
+      error-text-color: green,
+      container-text-size: 1rem,
+          disabled-input-text-placeholder-color: orange,
+          disabled-leading-icon-color: red,
+    ));
+
+.mat-error {
+  color: green !important;
+  /* pinkish custom error color */
+}
+
+.cart-card {
+  display: flex;
+  width: 25rem;
+  flex-grow: 1;
+  padding: 0 .8rem;
+  background: #f9f9f9;
+  gap: 0.8rem;
+  box-sizing: border-box;
+  border-radius: 5px;
+  justify-content: space-between;
+}
+
+.card-image {
+  border-bottom: 1px;
+}
+
+.cart-product-body {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.card-image {
+  max-width: 5rem;
+}
+
+.card-product-header {
+  display: flex;
+  justify-content: space-between;
+  & {
+    p:first-child {
+      max-width: 9rem;
+    }
+    p:last-child {
+      font-weight: 700;
+    }
+  }
+}
+
+.cart-action-buttons {
+  margin-left: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(70, 131, 180, 0.5);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cart-action-button {
+  background-color: inherit;
+  box-shadow: none;
+  border-radius: 0;
+  color: white;
+}
+
+.cart-product-qty {
+  margin: 0 1rem;
+  color: rgba(0, 0, 0, 0.966);
+}
+
+.cart-content {
+  max-height: 25rem;
+  /* overflow-y: scroll; */
+  /* scrollbar-gutter: stable; */
+}
+
+.card-product-body {
+  /* padding-top: 0.3rem; */
+  padding-bottom: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.total span {
+  font-weight: 600;
+}
+
+.empty-cart-msg {
+  color: rgba(0, 0, 0, 0.7);
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.cart-footer {
+  display: flex;
+  justify-content: space-between;
+}
+.divider{
+  margin-top: .4rem;
+  margin-inline: auto;
+  width: 90%;
+}
+
+.coupon {
+  margin-inline: auto;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.discount-applied {
+  text-decoration-line: line-through;
+  opacity: .6;
+  margin-inline-end: .5rem;
+}
+
