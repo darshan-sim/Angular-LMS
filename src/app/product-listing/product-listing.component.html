@@ -1,0 +1,40 @@
+<div class="grid-list">
+  @for (product of products; track product.productId) {
+  <div class="grid-tile">
+    <mat-card class="product-card" appearance="outlined">
+      <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>{{product.price | currency: 'USD' : 'symbol' : '2.2'}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image [src]="product.image" [alt]="product.name" />
+      <mat-card-content>
+        <p>
+          {{ product.description }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="cart-action-buttons">
+          <!-- <span> -->
+          @if(productCountIoCart(product.productId)){
+          <button mat-mini-fab class="cart-action-button" (click)="onRemoveFromCart(product.productId)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          } @if(productCountIoCart(product.productId)){
+            <span class="cart-product-qty">
+              {{ productCountIoCart(product.productId) }}
+            </span>
+          } @if(productCountIoCart(product.productId)){
+          <button mat-mini-fab class="cart-action-button" (click)="onAddToCart(product.productId)">
+            <mat-icon>add</mat-icon>
+          </button>
+          } @if (!productCountIoCart(product.productId)) {
+          <button mat-button class="cart-action-button" (click)="onAddToCart(product.productId)">
+            Add to Cart
+          </button>
+          }
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  }
+</div>
