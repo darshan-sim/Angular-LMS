@@ -13,9 +13,6 @@ export class BaseAPIService {
     return this.http
       .get<T>(environment.apiBase + url, { params })
       .pipe(
-        map(data => {console.log({data}); return data})
-      )
-      .pipe(
         catchError((error) =>
           throwError(
             () => new Error(error.error || error.message || 'Server Error')

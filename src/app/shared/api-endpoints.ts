@@ -6,6 +6,7 @@ export const PostApi = {
 
 export const UserApi = {
   Users: '/users',
+  UserByEmail: (email: string) => `/users?email=${email}`
 };
 
 export const CommentApi = {

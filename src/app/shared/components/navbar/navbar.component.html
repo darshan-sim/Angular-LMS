@@ -15,29 +15,33 @@
         >W-Bytes</span
       >
     </a>
-    <div
-      class="items-center justify-between flex w-auto"
-      id="navbar-sticky"
-    >
+    <div class="items-center justify-between flex w-auto" id="navbar-sticky">
       <ul
-        class="flex  gap-4 p-0 mt-4 font-medium border-gray-100 rounded-lg space-x-8 space-x-reverse flex-row  border-0 bg-white"
+        class="flex gap-4 p-0 mt-4 font-medium border-gray-100 rounded-lg space-x-8 space-x-reverse flex-row border-0 bg-white"
       >
         <li>
           <a
             routerLink="/home"
-            class="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0"
-            aria-current="page"
+            routerLinkActive="active"
+            class="block text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500"
             >Home</a
           >
         </li>
         <li>
           <a
             routerLink="/user/post"
-            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500"
+            routerLinkActive="active"
+            class="block text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500"
             >My Posts</a
           >
         </li>
-      
+        <li>
+          <a
+            (click)="onLogout()"
+            class="block text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500"
+            >Logout</a
+          >
+        </li>
       </ul>
     </div>
   </div>

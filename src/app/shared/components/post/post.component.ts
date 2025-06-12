@@ -39,7 +39,6 @@ export class PostComponent implements OnInit {
     this.showComments = !this.showComments;
     if (this.showComments) {
       this.commentStat.setDeleteCommentsOnPost(this.post().userId);
-      console.log('postUserId', this.post().userId);
       this.commentStat.loadComments(this.post().id);
     }
   }

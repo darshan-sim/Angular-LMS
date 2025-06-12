@@ -58,10 +58,8 @@ export class PostService {
   setDeleteCommentsOnPost(userId: string) {
     const uId = this.authService.user()?.id;
     if (uId === userId.toString()) {
-      console.log(uId === userId);
       this.canDeleteCommentsOnPost.set(true);
     } else {
-      console.log('Cant');
       this.canDeleteCommentsOnPost.set(false);
     }
   }
