@@ -24,21 +24,18 @@
         </p>
         }
       </div>
-      @if(canEdit){
       <button (click)="onCommentEditMode()">
         <i
           class="fa fa-pen text-green-600 hover:bg-gray-200 p-2 rounded-md"
           aria-hidden="true"
         ></i>
       </button>
-      } @if(canDelete){
       <button (click)="onCommentDelete(comment().id)">
         <i
           class="fa fa-trash text-red-600 hover:bg-gray-200 p-2 rounded-md"
           aria-hidden="true"
         ></i>
       </button>
-      }
     </div>
   </div>
 </div>

@@ -11,8 +11,4 @@ import { AuthService } from './core/auth.service';
 })
 export class AppComponent {
   title = 'practical-07';
-  loggedInPermission = signal(false);
-  constructor(private authService: AuthService) {
-    effect(() => this.loggedInPermission.set(authService.isLoggedIn()));
-  }
 }

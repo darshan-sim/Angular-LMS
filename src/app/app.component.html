@@ -1,4 +1,3 @@
-@if(loggedInPermission()){
 <app-navbar></app-navbar>
 <div class="min-h-screen max-w-[40rem] m-auto mt-28">
   <button
@@ -12,6 +11,3 @@
     <router-outlet></router-outlet>
   </div>
 </div>
-}@else {
-<router-outlet></router-outlet>
-}

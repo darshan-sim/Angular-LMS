@@ -10,8 +10,4 @@ import { AuthService } from '../../../core/auth.service';
   styleUrl: './navbar.component.css',
 })
 export class NavbarComponent {
-  authService = inject(AuthService);
-  onLogout() {
-    this.authService.logout();
-  }
 }

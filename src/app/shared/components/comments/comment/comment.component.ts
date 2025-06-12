@@ -33,7 +33,7 @@ export class CommentComponent implements OnInit {
   ngOnInit(): void {
     const uId = this.authService.user()?.id;
     if (uId) {
-      this.userId.set(uId);
+      this.userId.set("1");
     }
   }
 
@@ -57,15 +57,5 @@ export class CommentComponent implements OnInit {
 
   onCommentDelete(id: string) {
     this.postCommentService.removeComment(id);
-  }
-
-  get canDelete(): boolean {
-    return (
-      this.ownPostDelete() ||
-      this.userId()?.toString() === this.comment().userId.toString()
-    );
-  }
-  get canEdit(): boolean {
-    return this.userId()?.toString() === this.comment().userId.toString();
   }
 }

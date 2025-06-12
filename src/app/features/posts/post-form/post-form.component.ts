@@ -8,7 +8,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../core/auth.service';
 import { PostsService } from '../../../shared/service/posts.service';
-import { PostCreateDTO, PostDTO } from '../../../shared/models/post';
+import { PostDTO } from '../../../shared/models/post';
 
 @Component({
   selector: 'app-post-form',
@@ -25,6 +25,7 @@ export class PostFormComponent implements OnInit {
     title: new FormControl('', [Validators.required, Validators.minLength(3)]),
     body: new FormControl('', [Validators.required, Validators.minLength(10)]),
   });
+  post!: PostDTO
 
   authService = inject(AuthService);
   postsService = inject(PostsService);
@@ -42,6 +43,7 @@ export class PostFormComponent implements OnInit {
                 title: post.title,
                 body: post.body,
               });
+              this.post= post
             } else {
               this.router.navigate(['/not-found']);
             }
@@ -63,7 +65,7 @@ export class PostFormComponent implements OnInit {
 
       if (uId && postTitle && postBody) {
         const dto = {
-          userId: uId,
+          userId: this.post.userId || uId,
           title: postTitle,
           body: postBody,
         };

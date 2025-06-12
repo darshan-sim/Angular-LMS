@@ -7,12 +7,8 @@ export class AuthService {
   router = inject(Router);
 
   private userSignal = signal<UserDTO | null>(this.getUserFromLocalStorage());
-  readonly isLoggedIn = computed(() => this.userSignal() !== null)
-
-  login(user: UserDTO) {
-    localStorage.setItem('user', JSON.stringify(user));
-    this.userSignal.set(user);
-    this.router.navigate(['/home']);
+  constructor(){
+    this.setUserToLocalStorage()
   }
 
   get user() {
@@ -24,9 +20,13 @@ export class AuthService {
     return storedUser ? JSON.parse(storedUser) : null;
   }
 
-  logout(): void {
-    localStorage.removeItem('user');
-    this.userSignal.set(null);
-    this.router.navigate(['/login']);
+  setUserToLocalStorage(): void {
+    const user = {
+      id: '1',
+      name: 'Leanne Graham',
+      username: 'Bret',
+      email: 'Sincere@april.biz',
+    };
+    localStorage.setItem('user', JSON.stringify(user));
   }
 }
