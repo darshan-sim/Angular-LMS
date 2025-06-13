@@ -1,0 +1,13 @@
+h3 {
+    text-align: center;
+    font-size: 4rem;
+}
+
+.users-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    list-style: none;
+    margin: 0;
+}

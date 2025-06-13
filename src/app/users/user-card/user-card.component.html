@@ -1,0 +1,31 @@
+<div class="card">
+  <!-- <p>{{ user()?.id }}</p>
+  <p>{{ user()?.email }}</p> -->
+  <div class="img">
+    <div id="profileImage">
+      {{ user()?.username?.charAt(0) }}
+    </div>
+    <!-- <img
+      src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDB8fGZhY2V8ZW58MHwyfDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+    /> -->
+  </div>
+  <div class="infos">
+    <div class="name">
+      <h2>{{ user()?.name }}</h2>
+      <h4>{{ user()?.email }}</h4>
+    </div>
+    <p class="text">
+      {{ user()?.website }}
+    </p>
+    <ul class="stats">
+      <li>
+        <h3>Company Name</h3>
+        <h4>{{ user()?.company?.name }}</h4>
+      </li>
+      <li>
+        <h3>phone</h3>
+        <h4>{{ user()?.phone | phoneNumber}}</h4>
+      </li>
+    </ul>
+  </div>
+</div>
