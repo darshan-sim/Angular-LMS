@@ -1,0 +1,19 @@
+<header>
+  <h2>My notes</h2>
+</header>
+
+<ul>
+  @for (note of notes(); track note) {
+  <li>
+    <a [routerLink]="'/note/' + note.id">
+      <p>{{ note.title }}</p>
+    </a>
+    <div>
+      <button [routerLink]="['/note', note.id]" [queryParams]="{ edit: true }">
+        Edit
+      </button>
+      <button (click)="onDelete(note.id)">Delete</button>
+    </div>
+  </li>
+  }
+</ul>
