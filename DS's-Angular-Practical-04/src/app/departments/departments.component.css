@@ -1,0 +1,41 @@
+.container {
+  width: clamp(45ch, 50%, 75ch);
+  margin-inline: auto;
+  padding: 1rem 0;
+}
+
+h2 {
+  color: #081c15;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+select {
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  width: 20rem;
+  padding: 1rem 4rem 1rem 1rem;
+  background: var(--arrow-icon) no-repeat right 0.8em center / 1.4em,
+    linear-gradient(to left, var(--arrow-bg) 3em, var(--select-bg) 3em);
+  color: #081c15;
+  border-radius: 0.25em;
+  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+  option {
+    color: inherit;
+  }
+}
+
+.department {
+  width: 100%;
+  list-style-type: none;
+}

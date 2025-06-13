@@ -1,0 +1,21 @@
+<form class="form" ngForm (submit)="onSubmit()">
+  <div class="title">Create Department</div>
+  <div class="input-container ic1">
+    <label for="firstname" class="placeholder">Name of department</label>
+    <input
+      id="firstname"
+      class="input"
+      type="text"
+      name="departmentName"
+      placeholder=" "
+      [(ngModel)]="departmentName"
+    />
+    @if(errors["department"]){
+    <p class="error">{{ errors["department"] }}</p>
+    }
+  </div>
+  <div class="button-group">
+    <button type="button" class="close" (click)="onClose()">Close</button>
+    <button type="submit" class="submit">Submit</button>
+  </div>
+</form>

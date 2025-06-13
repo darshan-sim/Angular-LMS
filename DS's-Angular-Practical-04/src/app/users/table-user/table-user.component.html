@@ -1,0 +1,29 @@
+@if (users.length > 0) {
+
+  <table>
+    <thead>
+      <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (user of users; track user.id) {
+      <tr class="user">
+        <td class="user-id">
+          {{ user.id }}
+        </td>
+      <td class="user-name">
+        {{ user.name }}
+      </td>
+      <td class="user-email">
+        {{ user.email }}
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+} @else {
+  <p class="empty">NO USERS IN THE DEPARTMENT</p>
+}

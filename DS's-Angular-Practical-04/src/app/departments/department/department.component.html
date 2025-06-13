@@ -1,0 +1,24 @@
+<li class="department-item">
+  <p class="department-name">{{ department().name }}</p>
+  <p class="department-users">{{ department().users.length }}</p>
+  <button (click)="onCollapse()" [ngClass]="{'collapse': isCollapse}">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1rem"
+      height="1rem"
+      viewBox="0 0 1024 1024"
+      class="icon"
+      version="1.1"
+    >
+      <path
+        d="M106.666667 659.2L172.8 725.333333 512 386.133333 851.2 725.333333l66.133333-66.133333L512 256z"
+        fill="#2196F3"
+      />
+    </svg>
+    <!-- <i class="arrow down"></i> -->
+  </button>
+</li>
+
+@if (isCollapse) {
+<app-table-user [departmentId]="department().id" />
+}

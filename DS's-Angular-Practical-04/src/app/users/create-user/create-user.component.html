@@ -1,0 +1,61 @@
+<form class="form" (ngSubmit)="onSubmit()">
+  <div class="title">Create User</div>
+
+  <div class="input-container ic1">
+    <label for="username" class="placeholder">Name</label>
+    <input
+      id="username"
+      class="input"
+      type="text"
+      name="username"
+      placeholder=" "
+      [(ngModel)]="username"
+      required
+    />
+    @if(errors["username"]){
+    <p class="error">{{ errors["username"] }}</p>
+    }
+  </div>
+
+  <div class="input-container ic1">
+    <label for="email" class="placeholder">Email</label>
+    <input
+      id="email"
+      class="input"
+      type="email"
+      name="email"
+      placeholder=" "
+      [(ngModel)]="email"
+      required
+    />
+    @if(errors["email"]){
+    <p class="error">{{ errors["email"] }}</p>
+    }
+  </div>
+
+  <div class="input-container ic1">
+    <label for="department" class="placeholder">Department</label>
+    <select
+      id="department"
+      name="department"
+      class="input"
+      [(ngModel)]="departmentId"
+      required
+    >
+      <option value="" disabled selected>Select a department</option>
+      @for (department of dropdownDepartmentList; track department.id) {
+      <option [value]="department.id">
+        {{ department.name }}
+      </option>
+      }
+    </select>
+    @if(errors["departmentId"]){
+    <p class="error">{{ errors["departmentId"] }}</p>
+    }
+  </div>
+
+  <div class="button-group">
+    <button type="button" class="close" (click)="onClose()">Close</button>
+    <button type="submit" class="submit">Submit</button>
+  </div>
+</form>
