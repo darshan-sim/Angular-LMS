@@ -1,0 +1,140 @@
+<form class="form" (ngSubmit)="onSubmit()" #formInstance="ngForm">
+  <div class="title">Create User</div>
+
+  <div class="input-container">
+    <label for="username" class="placeholder">Name</label>
+    <input
+      id="username"
+      class="input"
+      type="text"
+      name="username"
+      placeholder=" "
+      #nameModule="ngModel"
+      [(ngModel)]="username"
+      required
+    />
+    <p class="error" *ngIf="nameModule.touched && nameModule.invalid">
+      <span *ngIf="nameModule.errors?.['required']">Name is required</span>
+    </p>
+  </div>
+
+  <div class="input-container">
+    <label for="email" class="placeholder">Email</label>
+    <input
+      id="email"
+      class="input"
+      type="text"
+      name="email"
+      placeholder=""
+      #emailModule="ngModel"
+      [(ngModel)]="email"
+      required
+      email
+    />
+    <p class="error" *ngIf="emailModule.touched && emailModule.invalid">
+      <span *ngIf="emailModule.errors?.['required']">Email is required</span>
+      <span *ngIf="emailModule.errors?.['email']">Email must be valid</span>
+    </p>
+  </div>
+
+  <div class="input-container">
+    <label for="password" class="placeholder">Password</label>
+    <input
+      id="password"
+      name="password"
+      type="password"
+      class="input"
+      [(ngModel)]="password"
+      #passwordModule="ngModel"
+      required
+      pattern="^(?=.*\d)(?=.*[!@#$%^&*]).{8,16}$"
+    />
+    <p class="error" *ngIf="passwordModule.touched && passwordModule.invalid">
+      <span *ngIf="passwordModule.errors?.['required']"
+        >Password is required</span
+      >
+      <span *ngIf="passwordModule.errors?.['pattern']">
+        8–16 character, with at least 1 number &amp; 1 special character
+      </span>
+    </p>
+  </div>
+
+  <div class="input-container">
+    <label for="salary" class="placeholder">Salary</label>
+    <input
+      id="salary"
+      class="input"
+      type="number"
+      name="salary"
+      #salaryModule="ngModel"
+      placeholder=""
+      [(ngModel)]="salary"
+      min="1"
+      required
+    />
+    <p class="error" *ngIf="salaryModule.touched && salaryModule.invalid">
+      <span *ngIf="salaryModule.errors?.['required']" class="error">
+        Salary is required
+      </span>
+      <span *ngIf="salaryModule.errors?.['min']" class="error">
+        Salary cant be less then 1. I mean really??
+      </span>
+    </p>
+  </div>
+
+  <div class="input-container">
+    <label for="designation" class="placeholder">Designation</label>
+    <input
+      id="designation"
+      class="input"
+      type="text"
+      name="designation"
+      #designationModule="ngModel"
+      placeholder=" "
+      [(ngModel)]="designation"
+      required
+    />
+    <p
+      class="error"
+      *ngIf="designationModule.touched && designationModule.invalid"
+    >
+      <span *ngIf="designationModule.errors?.['required']" class="error">
+        Designation is required
+      </span>
+    </p>
+  </div>
+
+  <div class="input-container">
+    <label for="department" class="placeholder">Department</label>
+    <select
+      id="department"
+      name="department"
+      class="input"
+      [(ngModel)]="department"
+      required
+      #departmentModule="ngModel"
+    >
+      <option value="" disabled selected>Select a department</option>
+      @for (department of dropdownDepartmentList; track department.id) {
+      <option [value]="department.name">
+        {{ department.name }}
+      </option>
+      }
+    </select>
+    <p
+      class="error"
+      *ngIf="departmentModule.touched && departmentModule.invalid"
+    >
+      <span *ngIf="departmentModule.errors?.['required']" class="error">
+        Select department
+      </span>
+    </p>
+  </div>
+
+  <div class="button-group">
+    <button type="button" class="close" (click)="onClose()">Close</button>
+    <button type="submit" class="submit" [disabled]="formInstance.invalid">
+      Submit
+    </button>
+  </div>
+</form>

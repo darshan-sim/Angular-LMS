@@ -1,0 +1,22 @@
+<div class="container nav">
+  <h2>Departments</h2>
+  <div>
+    <select name="department" id="department" (change)="onDepartmentSelect($event)">
+      <option selected value="all">All</option>
+      @for (dept of allDepartments(); track dept.id) {
+        <option [value]="dept.id">{{dept.name}}</option>
+      }
+    </select>
+  </div>
+</div>
+<div class="container">
+  <ul class="department">
+    @if (selectedDepartment()) {
+      <app-department [department]="selectedDepartment()!" />
+    }@else {
+      @for (dept of allDepartments(); track dept.id) {
+      <app-department [department]="dept" />
+      }
+    }
+  </ul>
+</div>

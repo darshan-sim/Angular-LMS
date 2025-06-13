@@ -1,0 +1,14 @@
+<!-- @if (isLoading) {
+<p>Loading users…</p>
+} @else { -->
+@if(users$ | async; as users){
+<h3>Users</h3>
+<ul class="users-list">
+  @for (user of users; track user.id) {
+  <app-user-card [user]="user"></app-user-card>
+  }
+</ul>
+} @else{
+<p>Loading users…</p>
+}
+<!-- } -->

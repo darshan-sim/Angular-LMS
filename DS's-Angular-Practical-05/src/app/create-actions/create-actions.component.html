@@ -1,0 +1,20 @@
+<nav>
+  <div>
+    <button>
+      <span class="button_top" (click)="onCreateDepartmentButtonClick()">
+        New Department
+      </span>
+    </button>
+    <button>
+      <span class="button_top" (click)="onCreateUserButtonClick()">
+        New User
+      </span>
+    </button>
+  </div>
+</nav>
+
+@if (isCreatingDepartment) {
+<app-create-department (close)="onCreateDepartmentButtonClick()"/>
+} @if(isCreatingUser){
+<app-create-user (close)="onCreateUserButtonClick()"/>
+}

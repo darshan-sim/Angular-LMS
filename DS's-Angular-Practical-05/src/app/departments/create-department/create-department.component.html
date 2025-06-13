@@ -1,0 +1,30 @@
+<form class="form" ngForm (submit)="onSubmit()" #formInstance="ngForm">
+  <div class="title">Create Department</div>
+  <div class="input-container ic1">
+    <label for="deptName" class="placeholder">Name of department</label>
+    <input
+      id="deptName"
+      class="input"
+      type="text"
+      name="departmentName"
+      placeholder=" "
+      [(ngModel)]="departmentName"
+      #nameModel="ngModel"
+      required
+    />
+    <p class="error" *ngIf="nameModel.touched && nameModel.invalid">
+      <span *ngIf="nameModel.errors?.['required']" class="error">
+        Department name is required
+      </span>
+    </p>
+    <p class="error" *ngIf="errors['department']">
+      {{ errors["department"] }}
+    </p>
+  </div>
+  <div class="button-group">
+    <button type="button" class="close" (click)="onClose()">Close</button>
+    <button type="submit" class="submit" [disabled]="formInstance.invalid">
+      Submit
+    </button>
+  </div>
+</form>

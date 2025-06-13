@@ -1,0 +1,32 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 1rem;
+  text-align: left;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+thead {
+  background-color: #f4f4f421;
+}
+
+th,
+td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+}
+
+th {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.empty {
+  font-size: 0.9rem;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+}

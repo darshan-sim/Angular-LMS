@@ -1,0 +1,37 @@
+@if (users.length > 0) {
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Salary</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (user of users; track user.id) {
+    <tr class="user">
+      <td>
+        {{ user.name }}
+      </td>
+      <td>
+        {{ user.email }}
+      </td>
+      <td>
+        {{ user.department }}
+      </td>
+      <td>
+        {{ user.salary }}
+      </td>
+      <td>
+        {{ user.createdAt | date : "shortDate" }} 
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+} @else {
+<p class="empty">NO USERS IN THE DEPARTMENT</p>
+}
